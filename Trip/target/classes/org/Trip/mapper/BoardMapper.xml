@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	<!-- namespace는 반드시 Mapper 인터페이스와 동일한 이름을 줘야함 -->
+	
+	<!-- select 태그의 id 속성값은 메서드의 이름과 일치하게 적어야함 -->
+	
+	<!-- resultType 속성 값은 select 쿼리의 결과를 특정 클래스의 객체로 만들기 위해 설정함 -->
+	
+	<!-- CDATA는 xml에서 부등호를 사용하기 위해 넣음 -->
+	
+<mapper namespace="org.zerock.mapper.BoardMapper">
+	
+	<sql id="criteria">
+	<!-- where 뒤 조건 부분에 접두 접미 부분은 기본적으로 AND를 쓰고 접두 부분은 OR로 덮어 씌운다 -->
+		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+			<foreach item='type' collection='typeArr'>
+				<trim prefix='OR'>
+					<choose>
+						<when test='type == "T".toString()'>
+							title like '%'||#{keyword}||'%'
+						</when>
+						<when test='type == "C".toString()'>
+							content like '%'||#{keyword}||'%'
+						</when>
+						<when test='type == "W".toString()'>
+							writer like '%'||#{keyword}||'%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+
+	<select id="getList" resultType="org.zerock.domain.BoardVO">
+		<![CDATA[
+		select * from tbl_board where bno > 0
+		]]>
+	</select>
+	
+	<!-- insert()는 단순히 시퀀스 값을 구한다 -->
+	
+	<!-- insertSelectKey()는 @SelectKey라는 MyBatis의 어노테이션을 사용, @SelectKey는 주로 미리(before) SQL을 통해서 처리해두고 특정한 이름으로 결과를 보관하는 방식,
+	@insert 할때 SQL문을 보면 #{bno}처럼 이미 처리된 결과를 이용한다 -->
+	
+	<insert id="insert">
+		insert into tbl_board (bno, title, content, writer)
+		values (seq_board.nextval, #{title}, #{content}, #{writer})
+	</insert>
+	
+	<!-- @Test실행시 selectkey태그안에있는 쿼리문이 먼저 실행됨 -->
+	
+	<insert id="insertSelectKey">
+		<selectKey keyProperty="bno" order="BEFORE" resultType="long">
+			select seq_board.nextval from dual
+		</selectKey>
+		
+		insert into tbl_board (bno, title, content, writer)
+		values(#{bno}, #{title}, #{content}, #{writer})
+	</insert>
+	
+	<!-- 쿼리문중 select문에 관한 것 -->
+	<select id="read" resultType="org.zerock.domain.BoardVO">
+		select * from tbl_board where bno = #{bno}
+	</select>
+	
+	
+	
+	<delete id="delete">
+		delete from tbl_board where bno = #{bno}
+	</delete>
+	
+	<update id="update">
+		update tbl_board set title=#{title}, content=#{content}, writer=#{writer}, updateDate = sysdate where bno = #{bno}
+	</update>
+	
+	
+	<!-- <select id="getListWithPaging" resultType="org.zerock.domain.BoardVO">
+	<![CDATA[
+	select
+		bno, title, content, writer, regdate, updatedate
+		from (
+			select /*+ INDEX_DESC(tbl_board pk_board) */
+			rownum rn, bno, title, content, writer, regdate, updatedate
+		from
+			tbl_board
+		where rownum <= #{pageNum} * #{amount}
+		)
+		where rn > (#{pageNum} - 1) * #{amount}
+	]]>
+	</select> -->
+	
+	<!-- 검색 기능 추가 -->
+	<!-- <select id="getListWithPaging" resultType="org.zerock.domain.BoardVO">
+	<![CDATA[
+	select
+		bno, title, content, writer, regdate, updatedate
+		from (
+			select /*+ INDEX_DESC(tbl_board pk_board) */
+			rownum rn, bno, title, content, writer, regdate, updatedate
+		from
+			tbl_board
+		where
+	]]>
+	위에 sql 태그를 집어 넣는다
+		<include refid="criteria"></include>
+	
+	<![CDATA[
+		 rownum <= #{pageNum} * #{amount}
+		)
+		where rn > (#{pageNum} - 1) * #{amount}
+	]]>
+	</select> -->
+	
+	<!-- 댓글 수 추가 -->
+	<select id="getListWithPaging" resultType="org.zerock.domain.BoardVO">
+	<![CDATA[
+	select
+		bno, title, content, writer, regdate, updatedate, replyCnt
+		from (
+			select /*+ INDEX_DESC(tbl_board pk_board) */
+			rownum rn, bno, title, content, writer, regdate, updatedate, replyCnt
+		from
+			tbl_board
+		where
+	]]>
+	<!-- 위에 sql 태그를 집어 넣는다 -->
+		<include refid="criteria"></include>
+		<!-- 부하를 줄이기 위해 인덱스 번호로 페이지 수를 갖고오는 쿼리문 -->
+	<!-- 인덱스 번호가 페이지 번호와 페이지에 표시되는 데이터 수를 곱한것보다 작거나 같을때까지 -->
+	<![CDATA[
+		 rownum <= #{pageNum} * #{amount}
+		)
+		where rn > (#{pageNum} - 1) * #{amount}
+	]]>
+	<!-- 인덱스 번호가 페이지 번호에서 1을 빼고 표시되는 데이터 수를 곱한것보다 큰 부분부터 -->
+	</select>
+	
+	
+	
+	<select id="getTotalCount" resultType="int">
+	
+		select count(*) from tbl_board where
+		
+		<include refid="criteria"></include>
+		
+		bno > 0
+		
+	</select>
+	
+</mapper>

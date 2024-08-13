@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.Trip.mapper.UserMapper">
+	<sql id="criteria">
+		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+			<foreach item='type' collection='typeArr'>
+				<trim prefix='OR'>
+					<choose>
+						<when test='type == "T".toString()'>
+							title like '%'||#{keyword}||'%'
+						</when>
+						<when test='type == "C".toString()'>
+							content like '%'||#{keyword}||'%'
+						</when>
+						<when test='type == "W".toString()'>
+							writer like '%'||#{keyword}||'%'
+						</when>
+						<when test='type == "cate".toString()'>
+							category like '%'||${keyword}||'%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+	
+	<!-- 회원가입 selectKey 버전 -->
+	<insert id="insertSelectKey">
+	
+		<selectKey keyProperty="uno" order="BEFORE" resultType="Long">
+			select seq_userno.nextval from dual
+		</selectKey>
+		
+		insert into trip_user (uno, userId, passwd, userNick, email, phone, zipCode, address1, address2, loginType)
+		values(#{uno}, #{userId}, #{passwd}. #{userNick}, #{email}, #{phone}, #{zipCode}, #{address1}, #{address2}, #{loginType})
+	</insert>
+	
+	<insert id='insert'>
+		insert into trip_user(uno, userId, passwd, userNick, email, phone, zipCode, address1, address2, loginType)
+		values (seq_userno.nextval, #{userId}, #{passwd}, #{userNick}, #{email}, #{phone}, #{zipCode}, #{address1}, #{address2}, #{loginType})
+	</insert>
+	
+	<!-- 회원 로그인 -->
+	<select id="read" resultType="org.Trip.domain.TripUserVO">
+		select * from trip_user where uno = #{uno}
+	</select>
+	
+	<update id="delete" parameterType='Long'>
+		update trip_user set deleted_at = sysdate where user_no = #{uno}
+	</update>
+	
+</mapper>
