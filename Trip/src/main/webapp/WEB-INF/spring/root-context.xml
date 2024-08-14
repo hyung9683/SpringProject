@@ -31,4 +31,8 @@
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 	
+	<mybatis-spring:scan base-package="org.Trip.mapper" />
+	
+	<context:component-scan base-package="org.Trip.service"></context:component-scan>
+	
 </beans>

@@ -51,4 +51,14 @@
 		update trip_user set deleted_at = sysdate where user_no = #{uno}
 	</update>
 	
+	<select id="findId" parameterType="String" resultType="org.Trip.domain.TripUserVO">
+		select * from trip_user where user_id = #{userId}
+	</select>
+	
+	<select id="getList" resultType="org.Trip.domain.TripUserVO">
+		<![CDATA[
+			select * from trip_user where uno > 0
+		]]>
+	</select>
+	
 </mapper>

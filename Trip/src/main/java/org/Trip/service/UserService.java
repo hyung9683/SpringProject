@@ -9,8 +9,15 @@ import org.Trip.domain.Criteria;
 
 public interface UserService {
 	
+	//아이디 체크
+	public boolean idCheck(String checkId);
+	
+	
 	// 회원가입
 	public void join(TripUserVO user);
+
+	//모든 유저(페이징 없이)
+	public List<TripUserVO> findAll();
 	
 	// 해당 유저
 	public TripUserVO get(Long uno);
@@ -19,7 +26,9 @@ public interface UserService {
 // === 관리자 ====
 	
 	// 유저 삭제 (회원탈퇴랑 같이 씀)
+	
 	public boolean remove(Long uno);
+	
 	
 	
 	//회원 정보 리스트 페이징

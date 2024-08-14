@@ -13,6 +13,9 @@ public interface UserMapper {
 	
 	public List<TripUserVO> getListWithPaging(Criteria cri);
 	
+	//아이디 중복 체크
+	public TripUserVO findId(String userId);
+	
 	//회원가입
 	public void insert(TripUserVO user);
 	
