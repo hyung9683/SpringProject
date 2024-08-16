@@ -21,7 +21,7 @@ import org.Trip.domain.TripUserVO;
 import org.Trip.service.UserService;
 
 @Log4j
-@RequestMapping("/user/*")
+//@RequestMapping("/user/*")
 @Controller
 public class UserController {
 	

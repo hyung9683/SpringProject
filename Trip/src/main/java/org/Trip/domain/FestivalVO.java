@@ -13,7 +13,9 @@ public class FestivalVO {
 	private String content;
 	private String local;
 	private Long localId;
+	private String localCategory;
 	private Date regdate;
+	private Date updatedate;
 	private String price;
 	private int count;
 	

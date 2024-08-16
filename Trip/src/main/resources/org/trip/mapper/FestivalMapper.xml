@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.Trip.mapper.FestivalMapper">
+	<select id="getList" resultType="org.Trip.domain.FestivalVO">
+		<![CDATA[
+			select * from trip_fs where fs_category = #{localCategory}
+		]]>
+	</select>
+	
+	<insert id="insertFes">
+		insert into trip_fs (fs_no, fs_tit, fs_ads, fs_content, fs_local, fs_id, fs_category, fs_price)
+		values (seq_fs.nextval, #{title}, #{address}, #{content}, #{local}, #{localId}, #{localCategory}, #{price})
+	</insert>
+	
+	<update id="updateFes">
+		update trip_fs set fs_title=#{title}, fs_content=#{content}, fs_price=#{price}, fs_local=#{local}, fs_id="#{localId}", fs_category=#{localCategory} updated_at = sysdate where fno = #{fno}
+	</update>
+	
+	<delete id="deleteFes">
+		delete from trip_fs where fno=#{fno}
+	</delete>
+	
+	<update id="updateCount">
+		update trip_fs set user_count = #{count} where fno=#{fno}
+	</update>
+</mapper>

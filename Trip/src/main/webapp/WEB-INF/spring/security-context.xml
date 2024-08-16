@@ -15,7 +15,10 @@
 	<!-- 해당 URI는 ROLE_MEMBER라는 권한이 있는 사용자만 접근  해당 access는 표현식과 권한명을 의미하는 문자열을 이용할 수 있다.-->
 	<security:intercept-url pattern="/user/member" access="hasRole('ROLE_MEMBER')" />
 
-	<security:form-login />
+	<!-- <security:form-login /> -->
+	
+	<!-- 반드시 get 방식 -->
+	<security:form-login login-page="/login" />
 	
 </security:http>
 

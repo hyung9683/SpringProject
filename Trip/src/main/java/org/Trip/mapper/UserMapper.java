@@ -17,7 +17,7 @@ public interface UserMapper {
 	public TripUserVO findId(String userId);
 	
 	//회원가입
-	public void insert(TripUserVO user);
+	public int insert(TripUserVO user);
 	
 	//pk를 명시적으로 보여주기 위해 시퀀스 번호를 더미 테이블에서 만든 뒤 갖고온다 
 	public Integer insertSelectKey(TripUserVO user);
