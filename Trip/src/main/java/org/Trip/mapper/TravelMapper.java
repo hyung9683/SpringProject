@@ -8,9 +8,11 @@ import org.Trip.domain.Criteria;
 
 public interface TravelMapper {
 	
-	 public List<TravelVO> getList(String category);
+	 public List<TravelVO> getList(String localId);
 	
 	 public List<TravelVO> getListPageWith(Criteria cri);
+	 
+	 public List<TravelVO> bestTrip();
 	
 	
 	 public int insertTrip(TravelVO trip);

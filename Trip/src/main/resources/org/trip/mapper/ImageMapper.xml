@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.Trip.mapper.ImageMapper">
+	
+	<!-- 여행지나 축제 테이블이랑 같이 쓴다. -->
+	<insert id="insertImg">
+		insert into trip_img (ino, m_img, img_sub1, img_sub2, img_sub3, img_sub4, fno, tno, localId, regdate) values(#{ino}, #{main}, #{sub1}, #{sub2}, #{sub3}, #{sub4}, #{fno}, #{tno}, #{localId}, sysdate)
+	</insert>
+	
+</mapper>

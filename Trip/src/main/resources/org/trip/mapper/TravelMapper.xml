@@ -5,7 +5,8 @@
 <mapper namespace="org.Trip.mapper.TravelMapper">
 	<select id="getList" resultType="org.Trip.domain.TravelVO">
 		<![CDATA[
-			select tv.tv_no, tv.tv_tit, tv.tv_content, tv.tv_local, tv.tv_id, tv.tv_category, img.tv_no, img.img_no, img.m_img, img.sub_img1, img.sub_img2, img.sub_img3, img.sub_img4 from trip_tv tv inner join trip_img img on tv.tv_no = img.img_no;
+			select tv.tv_no, tv.tv_tit, tv.tv_content, tv.tv_local, tv.tv_id, tv.tv_category, img.tv_no, img.img_no, img.m_img, img.sub_img1, img.sub_img2, img.sub_img3, img.sub_img4 from trip_tv tv inner join trip_img img on tv.tv_no = img.img_no
+			where 
 		]]>
 	</select>
 	
@@ -14,24 +15,30 @@
 		values (seq_tv.nextval, #{title}, #{address}, #{content}, #{local}, #{localId}, #{localCategory}, #{price})
 	</insert>
 	
+
+	
 	<update id="updateTrip">
 		update trip_tv set tv_tit=#{title}, tv_content=#{content}, tv_price=#{price}, tv_local=#{local}, tv_id="#{localId}", tv_category=#{localCategory} updated_at = sysdate where tno = #{tno}
 	</update>
 	
 	<delete id="deleteTrip">
-		delete frm trip_tv where tno=#{tno}
+		delete from trip_tv where tno=#{tno}
 	</delete>
 	
 	<update id="updateCount">
 		update trip_tv set user_count = #{count} where tno=#{tno}
 	</update>
 	
-	<select id="getListPageWith" resultType="org.zerock.domain.TravelVO">
+	<!-- <select id="getListPageWith" resultType="org.Trip.domain.TravelVO">
 		<![CDATA[
 			select t  from (
 				select /*+ INDEX_DESC(trip_tv pk_tvno) */
 				
 			)
 		]]>
+	</select> -->
+	
+	<select id="bestTrip" resultType="org.Trip.domain.TravelVO">
+			select * from trip_tv order by user_count desc limit 4
 	</select>
 </mapper>
