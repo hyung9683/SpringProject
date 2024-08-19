@@ -18,7 +18,8 @@ import org.Trip.service.FestivalService;
 
 import org.Trip.domain.TripUserVO;
 import org.Trip.domain.FestivalVO;
-import org.Trip.domain.TripUserVO;
+import org.Trip.domain.TravelVO;
+import org.Trip.domain.ImageFileVO;
 
 import lombok.extern.log4j.Log4j;
 import lombok.Setter;
@@ -37,8 +38,10 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public void home(Locale locale, Model model) {
-		log.info();
+	public void home(TripUserVO user, TravelVO tv, FestivalVO fes, ImageFileVO img, Model model) {
+		log.info("현재 로그인 여부:" + user);
+		
+		if()
 		
 		
 	}

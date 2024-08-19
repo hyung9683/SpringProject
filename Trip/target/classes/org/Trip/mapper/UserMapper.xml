@@ -33,18 +33,18 @@
 			select seq_userno.nextval from dual
 		</selectKey>
 		
-		insert into trip_user (uno, userId, passwd, userNick, email, phone, zipCode, address1, address2, loginType)
+		insert into trip_user (user_no, user_Id, user_passwd, user_nick, user_email, user_num, user_zipcode, user_adr1, user_adr2, user_login_ty)
 		values(#{uno}, #{userId}, #{passwd}. #{userNick}, #{email}, #{phone}, #{zipCode}, #{address1}, #{address2}, #{loginType})
 	</insert>
 	
 	<insert id='insert'>
-		insert into trip_user(uno, userId, passwd, userNick, email, phone, zipCode, address1, address2, loginType)
+		insert into trip_user(user_no, user_Id, user_passwd, user_nick, user_email, user_num, user_zipcode, user_adr1, user_adr2, user_login_ty)
 		values (seq_userno.nextval, #{userId}, #{passwd}, #{userNick}, #{email}, #{phone}, #{zipCode}, #{address1}, #{address2}, #{loginType})
 	</insert>
 	
 	<!-- 회원 로그인 -->
 	<select id="read" resultType="org.Trip.domain.TripUserVO">
-		select * from trip_user where uno = #{uno}
+		select * from trip_user where user_no = #{uno}
 	</select>
 	
 	<update id="delete" parameterType='Long'>
@@ -57,8 +57,15 @@
 	
 	<select id="getList" resultType="org.Trip.domain.TripUserVO">
 		<![CDATA[
-			select * from trip_user where uno > 0
+			select * from trip_user where user_no > 0
 		]]>
 	</select>
+	
+	
+	<select id="loginID" resultType="org.Trip.security.UserSecurityDetails">
+		select * from authorities where a_id = #{username}
+	</select>
+	
+	
 	
 </mapper>

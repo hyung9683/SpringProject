@@ -5,38 +5,103 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+
+<security:http auto-config="true" use-expressions="true">
+	
+	<security:intercept-url pattern="/**" access="permitAll" /> <!-- 로그인 없이 접근 가능 -->
+	<security:intercept-url pattern="/user/**" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" />
+	<security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
+	
+	<security:form-login login-page="/login" username-parameter="userId" password-parameter="passwd" login-processing-url="/loginProcess" default-target-url="/" always-use-default-target="true" authentication-success-handler-ref="authSuccHandler" authentication-failure-handler-ref="authFailHandler" authentication-failure-url="/login?error" />
+	
+	<security:logout logout-url="/logout" invalidate-session="true" />
+	
+	<security:session-management>
+		<security:concurrency-control max-sessions="1" expired-url="/login/loginDuplicate" />
+	</security:session-management>
+	
+	<!-- <security:access-denied-handler error-page="/accessError" /> -->
+	
+	<security:access-denied-handler ref="customAccessDenied" />
+	
+	<security:csrf disabled="true" />
+	
+</security:http>
+
 <bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
 
-<security:http>
+
+<bean id="authFailHandler" class="org.Trip.security.UserAuthenticationFailHandler">
+	<constructor-arg name="defaultFailureUrl" value="/login?error=auth" />
+</bean>
+
+<bean id="authSuccHandler" class="org.Trip.security.UserAuthenticationSuccessHandler">
+	<constructor-arg name="UserService" value="UserService" />
+</bean>
+
+<bean id="authProvider" class="org.Trip.security.UserAuthenticationProvider">
+	<constructor-arg name="UserService" value="UserService" />
+</bean>
+
+<bean id="UserService" class="org.Trip.security.UserAuthenticationService">
+	<constructor-arg name="UserMapper" value="UserMapper" />
+</bean>
+
+
+<security:authentication-manager alias="authManager">
+
+	<security:authentication-provider>
+		<security:jdbc-user-service data-source-ref="dataSource" />
+	</security:authentication-provider>
+	
+	<!-- <security:authentication-provider ref="authProvider" />
+	
+	<security:authentication-provider user-service-ref="UserService">
+		
+		<security:password-encoder ref="bcryptPasswordEncoder" />
+	
+	</security:authentication-provider> -->
+	
+</security:authentication-manager>
+
+
+
+
+
+
+
+<!-- -------------------------------예제 코드---------------------------------------- -->
+
+<!-- <security:http> -->
 
 <!-- access는 권한을 의미힌다 -->
-	<security:intercept-url pattern="/user/all" access="permitAll" />
+	<!-- <security:intercept-url pattern="/user/all" access="permitAll" /> -->
 	
 	<!-- 해당 URI는 ROLE_MEMBER라는 권한이 있는 사용자만 접근  해당 access는 표현식과 권한명을 의미하는 문자열을 이용할 수 있다.-->
-	<security:intercept-url pattern="/user/member" access="hasRole('ROLE_MEMBER')" />
+	<!-- <security:intercept-url pattern="/user/member" access="hasRole('ROLE_MEMBER')" /> -->
 
 	<!-- <security:form-login /> -->
 	
 	<!-- 반드시 get 방식 -->
-	<security:form-login login-page="/login" />
+	<!-- <security:form-login login-page="/login" /> -->
 	
-</security:http>
+<!-- </security:http>
 
 <security:authentication-manager>
 
 	<security:authentication-provider>
 	
-		<security:user-service>
+		<security:user-service> -->
 		
 			<!-- <security:user name="member" password="1234" authorities="ROLE_MEMBER" /> -->
 			
-			<security:user name="member" password="{noop}1234" authorities="ROLE_MEMBER" />
+			<!-- <security:user name="member" password="{noop}1234" authorities="ROLE_MEMBER" />
 			
 		</security:user-service>
 		
 	</security:authentication-provider>
 
-</security:authentication-manager>
+</security:authentication-manager> -->
 
 
 

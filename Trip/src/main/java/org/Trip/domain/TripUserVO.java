@@ -1,6 +1,9 @@
 package org.Trip.domain;
 
 import java.util.Date;
+import java.util.Collection;
+
+import org.springframework.security.core.GrantedAuthority;
 
 import lombok.Data;
 

@@ -1,5 +1,7 @@
 package org.Trip.mapper;
 
+import org.Trip.security.UserSecurityDetails;
+
 import java.util.List;
 
 //import org.apache.ibatis.annotations.Select;
@@ -31,5 +33,8 @@ public interface UserMapper {
 	
 	//현재 가입한 유저 수
 	public int getTotalCount(Criteria cri);
+	
+	// 권한 및 로그인 타입, 다른 테이블
+	public UserSecurityDetails loginID(String id);
 
 }
