@@ -8,51 +8,74 @@
 
 <security:http auto-config="true" use-expressions="true">
 	
-	<security:intercept-url pattern="/**" access="permitAll" /> <!-- 로그인 없이 접근 가능 -->
-	<security:intercept-url pattern="/user/**" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" />
-	<security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
+	<security:intercept-url pattern="/sample/all" access="permitAll" /> <!-- 로그인 없이 접근 가능 -->
+	<security:intercept-url pattern="/sample/member" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" />
+	<security:intercept-url pattern="/sample/admin" access="hasRole('ROLE_ADMIN')" />
 	
-	<security:form-login login-page="/login" username-parameter="userId" password-parameter="passwd" login-processing-url="/loginProcess" default-target-url="/" always-use-default-target="true" authentication-success-handler-ref="authSuccHandler" authentication-failure-handler-ref="authFailHandler" authentication-failure-url="/login?error" />
+	<!-- <security:form-login login-page="/login" username-parameter="userId" password-parameter="passwd" login-processing-url="/loginProcess" default-target-url="/" always-use-default-target="true" authentication-success-handler-ref="authSuccHandler" /> -->
 	
-	<security:logout logout-url="/logout" invalidate-session="true" />
+	<security:form-login login-page="/main/login" authentication-success-handler-ref="authSuccHandler" />
+	
+	<security:logout logout-url="/main/logout" invalidate-session="true" />
 	
 	<security:session-management>
+	
 		<security:concurrency-control max-sessions="1" expired-url="/login/loginDuplicate" />
+	
 	</security:session-management>
 	
 	<!-- <security:access-denied-handler error-page="/accessError" /> -->
 	
-	<security:access-denied-handler ref="customAccessDenied" />
+	<security:access-denied-handler ref="userAccessDenied" />
 	
-	<security:csrf disabled="true" />
+	<!-- <security:csrf disabled="true" /> -->
 	
 </security:http>
 
+<!-- <bean id="passwordEncoder" class="org.Trip.security.UserNoOpPasswordEncoder" /> -->
+
+<bean id="userAccessDenied" class="org.Trip.security.UserAccessDeniedHandler"></bean>
+
+
 <bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
 
-
-<bean id="authFailHandler" class="org.Trip.security.UserAuthenticationFailHandler">
-	<constructor-arg name="defaultFailureUrl" value="/login?error=auth" />
-</bean>
-
 <bean id="authSuccHandler" class="org.Trip.security.UserAuthenticationSuccessHandler">
-	<constructor-arg name="UserService" value="UserService" />
+	<!-- <constructor-arg name="UserService" value="UserService" /> -->
 </bean>
+
+<!-- <bean id="authFailHandler" class="org.Trip.security.UserAuthenticationFailHandler">
+	<constructor-arg name="defaultFailureUrl" value="/login?error=auth" />
+</bean> -->
+
+
 
 <bean id="authProvider" class="org.Trip.security.UserAuthenticationProvider">
-	<constructor-arg name="UserService" value="UserService" />
+	<!-- <constructor-arg name="UserService" value="UserService" /> -->
 </bean>
 
 <bean id="UserService" class="org.Trip.security.UserAuthenticationService">
-	<constructor-arg name="UserMapper" value="UserMapper" />
+	<!-- <constructor-arg name="UserMapper" value="UserMapper" /> -->
 </bean>
 
 
 <security:authentication-manager alias="authManager">
 
 	<security:authentication-provider>
-		<security:jdbc-user-service data-source-ref="dataSource" />
+		
+		<!-- jdbc를 이용한 테이블 설정 p.642 -->
+		<!-- <security:jdbc-user-service data-source-ref="dataSource" /> -->
+		
+		<!-- 인증과 권한을 확인하는데 필요한 쿼리 -->
+		<security:jdbc-user-service data-source-ref="dataSource" users-by-username-query="select user_id, user_pw, enabled from userMember where user_id = ?" authorities-by-username-query="select user_id, auth from userAuth where user_id = ?" />
+		
+		<!-- 비밀번호 암호화 -->
+		<security:password-encoder ref="bcryptPasswordEncoder" />
+		
+		<!-- <security:password-encoder ref="passwordEncoder" /> -->
+		
 	</security:authentication-provider>
+	
+	
 	
 	<!-- <security:authentication-provider ref="authProvider" />
 	
@@ -70,7 +93,7 @@
 
 
 
-<!-- -------------------------------예제 코드---------------------------------------- -->
+<!-- 예제 코드 -->
 
 <!-- <security:http> -->
 
