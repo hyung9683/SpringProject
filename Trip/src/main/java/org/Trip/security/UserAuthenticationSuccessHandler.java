@@ -34,13 +34,13 @@ public class UserAuthenticationSuccessHandler implements AuthenticationSuccessHa
 		
 		if (roleNames.contains("ROLE_ADMIN")) {
 			
-			response.sendRedirect("/admin");
+			response.sendRedirect("/sample/admin");
 			return ;
 		}
 		
 		if (roleNames.contains("ROLE_USER")) {
 			
-			response.sendRedirect("/user");
+			response.sendRedirect("/sample/member");
 			return;
 		}
 		
