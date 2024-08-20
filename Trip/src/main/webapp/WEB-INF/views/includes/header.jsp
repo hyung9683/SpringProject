@@ -13,13 +13,13 @@
 </head>
 <body>
 
-	<div class="header_wrapper col-md-3" id="wrapper">
+	<div class="header_wrapper" id="wrapper">
 		<nav class="navbar navbar-top">
 			<div class="container">
-					<a class="navbar-brand logo" href="home.jsp">
+					<a class="navbar-brand logo title" href="home.jsp">
 						<img src="../../../resources/uploads/logo.png">
 					</a>
-				<div class="col-md-4 navbar-search">
+				<div class="navbar-search">
 					<form id="mainSearch" action="/" method="get">
 						<select name='type'>
 							<option value="" <c:out value="${categoryMaker.cate.type == null ? 'selected' : '' }"/>>--</option>
@@ -32,8 +32,8 @@
 					</form>
 				</div>
 				
-				<div class="col-md-5 navbar_icon">
-					<ul class="navbar-nav col-md-5">
+				<div class="navbar_icon">
+					<ul class="navbar-nav">
 						<li class="nav-item">
 							<a class="nav-link mypage" href="mypage.jsp">마이페이지</a>
 						</li>
@@ -42,7 +42,7 @@
 						</li>
 					</ul>
 					
-					<ul class="navbar-nav col-md-7">
+					<ul class="navbar-nav">
 					<sec:authorize access="!isAuthenticated()">
 						<li class="nav-item">
 							<a class="nav-link join" href="login.jsp">로그인</a>
@@ -79,8 +79,25 @@
 	<div id="page-wrapper">
 	
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <style>
+
+.title {
+	cursor: pointer;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+ul, li {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+}
 
 .header_wrapper {
 	font-size: 15px;
@@ -110,7 +127,7 @@
 	padding: 0 0 0 16px;
 }
 
-.navbar_search {
+.navbar-search {
 	display:flex;
 	width: 30rem;
 	max-width: 100%;
@@ -135,7 +152,7 @@ input[type='text']:focus {
 	caret-color: rgb(0, 0, 0);
 }
 
-.bi-search {
+.bi {
 	display: flex;
 	border: 0;
 	height: 38px;
@@ -145,12 +162,42 @@ input[type='text']:focus {
 	cursor: pointer;
 }
 
+.bi-search {
+	position: relative;
+	top: -3px;
+	scale: 70%;
+}
+
 .navbar_icon {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	scale: 80%;
 	position: relative;
+}
+
+.mypage {
+	cursor: pointer;
+	margin-top: 16px;
+	scale: 130%;
+	margin-left: 16px;
+}
+
+.qna {
+	font-size: 20px;
+	cursor: pointer;
+	scale: 95%;
+	margin-left: 46px;
+	margin-top: 15px;
+	
+}
+
+.mypage:hover {
+	filter: opacity(0.2) drop-shadow(0 0 0 #df7a00);
+}
+
+.qna:hover {
+	filter: opacity(0.2) drop-shadow(0 0 0 #df7a00);
 }
 
 .navbar_bottom {
@@ -201,5 +248,30 @@ input[type='text']:focus {
 
 .category li:hover:after {
 	transform: scaleX(1);
+}
+
+.join {
+	display:flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.join li {
+	margin-left: 30px;
+	width: 120px;
+	height: 6px;
+	line-height: 0px;
+	text-align: center;
+	padding: 8px 0;
+	margin-top: 14px;
+}
+
+.join li:nth-child(1) {
+	margin-left: 0px;
+}
+
+.join li:hover {
+	color: #ee8700;
+	cursor: pointer;
 }
 </style>

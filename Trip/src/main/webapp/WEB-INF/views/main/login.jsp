@@ -3,26 +3,31 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@include file="../includes/header.jsp" %>
-<div class="container trip-login">
-	<h1>로그인 페이지</h1>
-	<h2><c:out value="${error }" /></h2>
-	<h2><c:out value="${logout }" /></h2>
-	
-	<form method='post' action="/user/login">
-		<div>
-			<input type='text' name='userid' value='admin'>
-		</div>
-		<div>
-			<input type='password' name='password' value='admin'>
-		</div>
-		<div>
-			<input type='submit'>
-		</div>
-		<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
+<div class="content">
+	<div class="container trip-login">
+		<h1>로그인 페이지</h1>
+		<h2><c:out value="${error }" /></h2>
+		<h2><c:out value="${logout }" /></h2>
 		
-	</form>
+		<form method='post' action="/user/login">
+			<div>
+				<input type='text' name='userid' value='admin'>
+			</div>
+			<div>
+				<input type='password' name='password' value='admin'>
+			</div>
+			<div>
+				<input type='submit'>
+			</div>
+			<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
+			
+		</form>
+	</div>
 </div>
+
+<div class="footer">
 <%@include file="../includes/footer.jsp" %>
+</div>
 <script>
 	
 	document.addEventListener("DOMContentLoaded", function() {
@@ -43,4 +48,7 @@
 </script>
 
 <style>
+.trip-login {
+	position: relative;
+}
 </style>

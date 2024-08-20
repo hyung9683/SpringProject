@@ -9,7 +9,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-$(document).ready(function() {
+/* $(document).ready(function() {
 	$('#dataTables-example').DataTable({
 		responsive: true	
 	});
@@ -17,7 +17,7 @@ $(document).ready(function() {
 	.attr("class", "sidebar-nav navbar-collapse collapse")
 	.attr("aria-expanded", 'false')
 	.attr("style", "height:1px");
-});
+}); */
 </script>
 
 </body>
