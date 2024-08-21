@@ -6,71 +6,72 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%@include file="./bootstrap.jsp" %>
 <meta charset="UTF-8">
 <title>Trip</title>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/defaultMain.css">
+<%@include file="./bootstrap.jsp" %>
 
 </head>
 <body>
 
-	<div class="header_wrapper" id="wrapper">
-		<nav class="navbar navbar-top">
-			<div class="container">
-					<a class="navbar-brand logo title" href="home.jsp">
+	<div class="header_wrapper" id="wrapper" style="font-sze: 15px; position: fixed; top: 0; left: 0; z-index: 20; width: 100%; background: #ffffff; box-shadow: 0 4px 5px -4px rgb(219, 219, 219);">
+		<nav class="navbar_top" style="display: flex; height:90px; justify-content:space-between; align-items: center; padding: 0; --bs-navbar-padding-x: 0;">
+				<div class="navbar_logo" style="scale:50%; position: relative; left:-120px; top: 31px; padding: 0 0 0 16px;">
+					<a class="navbar-brand title" href="home.jsp">
 						<img src="../../../resources/uploads/logo.png">
 					</a>
-				<div class="navbar-search">
-					<form id="mainSearch" action="/" method="get">
-						<select name='type'>
+				</div>
+					<form id="mainSearch" action="/" method="get" style="display:flex;">
+						<select name='type' style="position: relative;" class="searchSelect">
 							<option value="" <c:out value="${categoryMaker.cate.type == null ? 'selected' : '' }"/>>--</option>
 							<option value="TRAVEL" <c:out value="${categoryMaker.cate.type eq 'TRAVEL' ? 'selected' : '' }"/>>여행지</option>
 							<option value="FESTIVAL" <c:out value="${categoryMaker.cate.type eq 'FESTIVAL' ? 'selected' : '' }"/>>축제</option>
 							<option value="BOARD" <c:out value="${categoryMaker.cate.type eq 'BOARD' ? 'selected' : '' }"/>>자유게시판</option>
 						</select>
-						<input type='text' name='keyword' value='<c:out value="${categoryMaker.cate.keyword }"/>' />
-						<button class="btn btn-default"><i class="bi bi-search"></i></button>
+				<div class="navbar_search" id="search">
+						<input type='text' name='keyword' value='<c:out value="${categoryMaker.cate.keyword }"/>'/>
+						<button class="searchbtn" style="display:flex; border:0; height: 38px; width: 50px; position:relative; background: none; cursor: pointer;"><i class="bi bi-search" style="position:relative; top:5px; scale: 100%;"></i></button>
 					</form>
 				</div>
 				
-				<div class="navbar_icon">
-					<ul class="navbar-nav">
-						<li class="nav-item">
-							<a class="nav-link mypage" href="mypage.jsp">마이페이지</a>
+				
+					<ul class="navbar_icon" style="display:flex; justify-content:space-between; align-items: center; scale: 80%; position: relative;">
+						<li class="mypage" style="cursor:pointer; margin-top:16px; scale:130%; margin-left: 16px;">
+							<a class="nav-link" href="mypage.jsp">마이페이지</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link qna" href="qna.jsp">고객센터</a>
+						<transition-group name="fade" mode="out-in"></transition-group>
+						<li class="qna" style="font-size:20px; cursor:pointer; scale: 95%; margin-left: 46px; margin-top: 15px;">
+							<a class="nav-link" href="qna.jsp">고객센터</a>
 						</li>
 					</ul>
 					
-					<ul class="navbar-nav">
+					<ul class="join" style="display: flex; justify-content: space-between; align-items: center;">
 					<sec:authorize access="!isAuthenticated()">
-						<li class="nav-item">
-							<a class="nav-link join" href="login.jsp">로그인</a>
+						<li style="margin-left: 0px; width: 120px; height: 6px; line-height: 0px; text-align: center; padding: 8px 0; margin-top: 14px;">
+							<a class="nav-link" href="login.jsp">로그인</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link join" href="join.jsp">회원가입</a>
+						<li style="margin-left: 30px; width: 120px; height: 6px; line-height: 0px; text-align: center; padding: 8px 0; margin-top: 14px;">
+							<a class="nav-link" href="join.jsp">회원가입</a>
 						</li>
 					</sec:authorize>
 					<sec:authorize access="isAuthenticated()">
-						<li class="nav-item">
-							<a class="nav-link join" href="logout.jsp">로그아웃</a>
+						<li style="margin-left: 30px; width: 120px; height: 6px; line-height: 0px; text-align: center; padding: 8px 0; margin-top: 14px;">
+							<a class="nav-link" href="logout.jsp">로그아웃</a>
 						</li>
 					</sec:authorize>
 					</ul>
-				</div>
-			</div>
 			
 			
 		
 		</nav>
 		
-		<nav class="navbar navbar_bottom">
+		<nav class="navbar_bottom" style="justify-content: space-between; align-items: center; display: flex; height: 60px;">
 			<form action="/trip">
-				<ul class="category">
-					<li><a href="#">여행지</a></li>
-					<li><a href="#">축제</a></li>
-					<li><a href="#">자유게시판</a></li>
-					<li><a href="#">전체목록</a></li>
+				<ul class="category" style="display:flex; position: relative; margin:auto;">
+					<li style="font-size: 1rem; display:inline-block; margin-left: 30px; width: 8rem; height: 30px; margin-top: 16px; text-align: center;"><a class="nav-link" href="#">여행지</a></li>
+					<li style="font-size: 1rem; display:inline-block; margin-left: 30px; width: 8rem; height: 30px; margin-top: 16px; text-align: center;"><a class="nav-link" href="#">축제</a></li>
+					<li style="font-size: 1rem; display:inline-block; margin-left: 30px; width: 8rem; height: 30px; margin-top: 16px; text-align: center;"><a class="nav-link" href="#">자유게시판</a></li>
+					<li style="font-size: 1rem; display:inline-block; margin-left: 30px; width: 8rem; height: 30px; margin-top: 16px; text-align: center;"><a class="nav-link" href="#">전체목록</a></li>
 				</ul>
 			</form>
 		</nav>
@@ -80,6 +81,25 @@
 	
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+	document.addEvenListener("DOMContentLoaded", function() {
+		
+		function leftPosition() {
+			
+			var leftSearch = document.querySelector(".navbar_search");
+			var select = document.querySelector(".searchSelect");
+			
+			var navbarSearchRight = leftSearch.getBoundingClientRect().right;
+			
+			select.style.right = (navbarSearchRight + 10) + "px";
+		}
+		
+		leftPosition();
+		
+		window.addEventListener("resize", leftPosition);
+	})
+</script>
+
 <style>
 
 .title {
@@ -99,7 +119,15 @@ a {
 	text-decoration: none;
 }
 
+@font-face {
+	font-family: 'GmarketSansMedium';
+	src: url('http://cdn.jsdelivr/net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
 .header_wrapper {
+	font-family: 'GmarketSansMedium';
 	font-size: 15px;
 	position: fixed;
 	top: 0;
@@ -110,7 +138,7 @@ a {
 	box-shadow: 0 4px 5px -4px rgb(219, 219, 219);
 }
 
-.navbar-top {
+.navbar_top {
 	display: flex;
 	height: 90px;
 	justify-content: space-between;
@@ -119,7 +147,7 @@ a {
 	--bs-navbar-padding-x: 0;
 }
 
-.logo {
+.navbar_logo {
 	scale: 50%;
 	position: relative;
 	left: -120px;
@@ -127,8 +155,9 @@ a {
 	padding: 0 0 0 16px;
 }
 
-.navbar-search {
+.navbar_search {
 	display:flex;
+	justify-content: space-between;
 	width: 30rem;
 	max-width: 100%;
 	border-radius: 200px;
@@ -139,7 +168,7 @@ a {
 	padding-left: 20px;
 }
 
-input[type='text'] {
+.navbar_search input[type='text'] {
 	width: 100%;
 	font-size: 1rem;
 	outline: none;
@@ -148,11 +177,11 @@ input[type='text'] {
 	margin-right: 8px;
 }
 
-input[type='text']:focus {
+.navbar_search input[type='text']:focus {
 	caret-color: rgb(0, 0, 0);
 }
 
-.bi {
+/* .btn {
 	display: flex;
 	border: 0;
 	height: 38px;
@@ -162,11 +191,11 @@ input[type='text']:focus {
 	cursor: pointer;
 }
 
-.bi-search {
+.btn i {
 	position: relative;
 	top: -3px;
 	scale: 70%;
-}
+}  */
 
 .navbar_icon {
 	display: flex;
@@ -201,7 +230,7 @@ input[type='text']:focus {
 }
 
 .navbar_bottom {
-	justify-contetn: space-between;
+	justify-contet: space-between;
 	align-items: center;
 	display: flex;
 	height: 60px;
