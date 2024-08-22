@@ -26,11 +26,12 @@ public class UserTests {
 	@Setter(onMethod_ =@Autowired)
 	private DataSource ds;
 	
-	
+//	
 //	@Test
 //	public void testInsertMember() {
-//		
+		
 //		String sql = "insert into userMember(uno, user_id, user_pw, user_nick) values(seq_mem.nextval, ?, ?, ?)";
+//		String sql = "insert into userTable(uno, user_id, user_pw, user_nick) values(seq_user.nextval, ?, ?, ?)";
 //	
 //		
 //		// 100명의 회원 정보를 기록
@@ -84,7 +85,7 @@ public class UserTests {
 	@Test
 	public void testInsertAuth() {
 		
-		String sql = "insert into userAuth (user_id, auth) values (?, ?)";
+		String sql = "insert into user_auth (user_id, auth) values (?, ?)";
 		
 		for (int i = 0; i < 100; i++) {
 			

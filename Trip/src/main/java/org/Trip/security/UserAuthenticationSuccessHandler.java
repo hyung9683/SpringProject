@@ -26,6 +26,7 @@ public class UserAuthenticationSuccessHandler implements AuthenticationSuccessHa
 		
 		auth.getAuthorities().forEach(authority -> {
 			
+			// 권한
 			roleNames.add(authority.getAuthority());
 			
 		});
@@ -38,7 +39,7 @@ public class UserAuthenticationSuccessHandler implements AuthenticationSuccessHa
 			return ;
 		}
 		
-		if (roleNames.contains("ROLE_USER")) {
+		if (roleNames.contains("ROLE_USER, ROLE_MEMBER")) {
 			
 			response.sendRedirect("/sample/member");
 			return;

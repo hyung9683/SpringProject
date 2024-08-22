@@ -9,7 +9,7 @@
 		<h2><c:out value="${error }" /></h2>
 		<h2><c:out value="${logout }" /></h2>
 		
-		<form method='post' action="/user/login">
+		<form method='post' action="/login">
 			<div>
 				<input type='text' name='userid' value='admin'>
 			</div>

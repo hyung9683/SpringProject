@@ -10,5 +10,7 @@
 <!-- all or member or admin -->
 <h1>/user/admin page</h1>
 
+<a href="/main/logout">Logout</a>
+
 </body>
 </html>
