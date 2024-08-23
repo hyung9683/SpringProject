@@ -7,38 +7,65 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import org.Trip.mapper.UserMapper;
-import org.Trip.domain.TripUserVO;
+import org.Trip.mapper.MemberMapper;
+
+//import org.Trip.mapper.UserMapper;
+//import org.Trip.domain.TripUserVO;
+
+import org.Trip.domain.MemberVO;
+import org.Trip.security.domain.CustomUser;
 
 
 import lombok.Setter;
 import lombok.Data;
+import lombok.extern.log4j.Log4j;
 //Spring Sercurity 사용자인증 관련 클래스
 //DB에서 사용자 정보조회를 담당하는 클래스
 
 @Data
 @Service
+@Log4j
 public class UserAuthenticationService implements UserDetailsService {
 	
+//	@Setter(onMethod_ = {@Autowired})
+//	private UserMapper userMapper;
+//	
+//	
+//	
+//	
+//	public UserSecurityDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
+//		
+//		UserSecurityDetails userDetails = null;
+//		
+//		TripUserVO user = userMapper.findId(userId);
+//		
+//		if(user == null) {
+//			
+//			
+//			throw new UsernameNotFoundException(userId);
+//		}
+//		
+//		userDetails = new UserSecurityDetails();
+//		return userDetails;
+//	}
+	
 	@Setter(onMethod_ = {@Autowired})
-	private UserMapper userMapper;
+	private MemberMapper memberMapper;
 	
-	
-	
-	
-	public UserSecurityDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
+	@Override
+	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
 		
-		UserSecurityDetails userDetails = null;
+		log.warn("Load User By UserName: " + userName);
 		
-		TripUserVO user = userMapper.findId(userId);
+		// userName means userid
+		MemberVO vo = memberMapper.read(userName);
 		
-		if(user == null) {
-			
-			
-			throw new UsernameNotFoundException(userId);
-		}
+		log.warn("queried by member mapper:" + vo);
 		
-		userDetails = new UserSecurityDetails();
-		return userDetails;
+		//CustomUser 객체로 변환
+		
+		return vo == null ? null : new CustomUser(vo);
+//		return null;
 	}
+	
 }

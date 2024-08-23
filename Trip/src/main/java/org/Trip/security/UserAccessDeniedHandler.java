@@ -20,6 +20,6 @@ public class UserAccessDeniedHandler implements AccessDeniedHandler {
 		
 		log.error("Redirect.......");
 		
-		response.sendRedirect("/accessError");
+		response.sendRedirect("/sample/accessError");
 	}
 }
