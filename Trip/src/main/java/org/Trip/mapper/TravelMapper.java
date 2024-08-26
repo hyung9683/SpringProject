@@ -3,6 +3,7 @@ package org.Trip.mapper;
 import java.util.List;
 
 import org.Trip.domain.TravelVO;
+import org.Trip.domain.ImageFileVO;
 import org.Trip.domain.Criteria;
 
 
@@ -13,6 +14,8 @@ public interface TravelMapper {
 	 public List<TravelVO> getListPageWith(Criteria cri);
 	 
 	 public List<TravelVO> bestTrip();
+	 
+	 public List<ImageFileVO> bestImage();
 	
 	
 	 public int insertTrip(TravelVO trip);

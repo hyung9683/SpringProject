@@ -4,12 +4,15 @@ import java.util.List;
 
 import org.Trip.domain.Criteria;
 import org.Trip.domain.FestivalVO;
+import org.Trip.domain.ImageFileVO;
 
 public interface FestivalMapper {
 	
 	public List<FestivalVO> getList();
 	
 	 public List<FestivalVO> getListPageWith(Criteria cri);
+	 
+	 public List<ImageFileVO> bestImage();
 	
 	
 	 public int insertFes(FestivalVO trip);

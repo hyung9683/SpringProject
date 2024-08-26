@@ -38,6 +38,21 @@
 		]]>
 	</select> -->
 	
+	<resultMap type="org.Trip.domain.TravelVO" id="tripMap">
+		<id property="tripId" column="tno"/>
+		<result property="tno" column="tno" />
+		<result property="title" column="" />
+		<result property="usernick" column="user_nick" />
+		<result property="regdate" column="regdate" />
+		<collection property="imageList" resultMap="imageMap"></collection>
+	</resultMap>
+	
+	<resultMap type="org.Trip.domain.ImageFileVO" id="imageMap">
+		<result property="userid" column="user_id" />
+		<result property="auth" column="auth" />
+	</resultMap>
+	
+	
 	<select id="bestTrip" resultType="org.Trip.domain.TravelVO">
 			select * from trip_tv order by user_count desc limit 4
 	</select>
