@@ -15,6 +15,11 @@ public class MemberVO {
 	
 	private Date regdate;
 	private Date updateDate;
+//	private String userName;
+//	private boolean enabled;
+//	
+//	private Date regdate;
+//	private Date updatedate;
 	private List<AuthVO> authList;
 
 }

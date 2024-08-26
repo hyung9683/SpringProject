@@ -18,15 +18,15 @@ import lombok.Setter;
 
 
 import org.Trip.domain.TripUserVO;
-import org.Trip.service.UserService;
+//import org.Trip.service.UserService;
 
 @Log4j
 //@RequestMapping("/user/*")
 @Controller
 public class UserController {
 	
-	@Setter(onMethod_ = {@Autowired})
-	private UserService userService;
+//	@Setter(onMethod_ = {@Autowired})
+//	private UserService userService;
 	
 	@Setter(onMethod_ = {@Autowired})
 	private PasswordEncoder encoder;
@@ -40,51 +40,51 @@ public class UserController {
 	}
 	
 	
-	@GetMapping("/check")
-	public boolean idCheck(@RequestBody TripUserVO user, Model model) {
-		
-		log.info("아이디 중복체크");
-		
-		boolean isCheck = userService.idCheck(user.getUserId());
-		
-		model.addAttribute("입력된 아이디", isCheck);
-		
-		if(isCheck) {
-			
-			return false;
-		}
-		
-		return true;
-		
-		
-	}
+//	@GetMapping("/check")
+//	public boolean idCheck(@RequestBody TripUserVO user, Model model) {
+//		
+//		log.info("아이디 중복체크");
+//		
+//		boolean isCheck = userService.idCheck(user.getUserId());
+//		
+//		model.addAttribute("입력된 아이디", isCheck);
+//		
+//		if(isCheck) {
+//			
+//			return false;
+//		}
+//		
+//		return true;
+//		
+//		
+//	}
 	
 	
 	//회원정보 저장
-	@PostMapping("/join")
-	public String join(TripUserVO user, RedirectAttributes rttr) {
-		
-		
-			
-			String cryptEncoderPw = encoder.encode(user.getPasswd());
-			
-			//암호화 비밀번호 저장
-			user.setPasswd(cryptEncoderPw);
-			
-			log.info("암호화 비밀번호:" + user.getPasswd());
-			
-			
-			log.info("회원가입 정보:" + user);
-			
-			userService.join(user);
-			
-			
-		
-		return "";
-		
-		
-		
-		
-	}
+//	@PostMapping("/join")
+//	public String join(TripUserVO user, RedirectAttributes rttr) {
+//		
+//		
+//			
+//			String cryptEncoderPw = encoder.encode(user.getPasswd());
+//			
+//			//암호화 비밀번호 저장
+//			user.setPasswd(cryptEncoderPw);
+//			
+//			log.info("암호화 비밀번호:" + user.getPasswd());
+//			
+//			
+//			log.info("회원가입 정보:" + user);
+//			
+//			userService.join(user);
+//			
+//			
+//		
+//		return "";
+//		
+//		
+//		
+//		
+//	}
 
 }
