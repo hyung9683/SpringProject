@@ -47,6 +47,8 @@
 	<!-- <constructor-arg name="UserService" value="UserService" /> -->
 </bean>
 
+<bean id="customUserDetailsService" class="org.Trip.security.CustomUserDetailService"></bean>
+
 <!-- <bean id="authFailHandler" class="org.Trip.security.UserAuthenticationFailHandler">
 	<constructor-arg name="defaultFailureUrl" value="/login?error=auth" />
 </bean> -->
@@ -57,15 +59,16 @@
 	<!-- <constructor-arg name="UserService" value="UserService" /> -->
 </bean>
 
-<bean id="UserService" class="org.Trip.security.UserAuthenticationService">
-	<!-- <constructor-arg name="UserMapper" value="UserMapper" /> -->
-</bean>
+<!-- <bean id="UserService" class="org.Trip.security.UserAuthenticationService">
+	<constructor-arg name="UserMapper" value="UserMapper" />
+</bean> -->
 
 
 <security:authentication-manager alias="authManager">
 
 	<!-- <security:authentication-provider> -->
-	<security:authentication-provider user-service-ref="UserService">
+	<!-- <security:authentication-provider user-service-ref="UserService"> -->
+	<security:authentication-provider user-service-ref="customUserDetailsService">
 		
 		<!-- jdbc를 이용한 테이블 설정 p.642 -->
 		<!-- <security:jdbc-user-service data-source-ref="dataSource" /> -->

@@ -134,17 +134,17 @@ public class UserTests {
 	
 	
 	@Test
-	public MemberVO testRead() {
+	public void testRead() {
 		
 		MemberVO vo = new MemberVO();
 		
 		String id = vo.getUserid();
 		
-		log.info(mapper.read(id));
+		id = "user0";
 		
-		log.error(id);
+		log.info("가져온 아이디:" + id);
 		
-		return mapper.read(id);
+		mapper.read(id);
 	}
 		
 	}

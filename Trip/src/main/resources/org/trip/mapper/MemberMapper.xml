@@ -36,10 +36,10 @@
 	<select id="read" resultMap="memberMap">
 	
 		select
-		m.user_id, m.user_pw, m.user_nick, m.enabled, m.regdate, a.auth
+		m.user_id, user_pw, user_nick, enabled, regdate, updatedate, auth
 		from
 			userTable m left outer join user_auth a on m.user_id = a.user_id
-			where m.user_id = #{userid}
+		where m.user_id = #{userid}
 	
 		<!-- select mem.userid, userpw, username, enabled, regdate, updatedate, auth 
 		from user_member mem left outer join member_auth auth on mem.userid = auth.userid 
