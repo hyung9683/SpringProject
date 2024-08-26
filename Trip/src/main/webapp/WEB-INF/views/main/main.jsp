@@ -41,7 +41,9 @@
 	<div class="content">
 		<h2 class="trip_title">여행지 BEST</h2>
 		<form action="/trip" method="get">
+			<c:forEach 
 			<div class="card">
+				
 			</div>
 		</form>
 	</div>

@@ -47,7 +47,7 @@
 	<!-- <constructor-arg name="UserService" value="UserService" /> -->
 </bean>
 
-<bean id="customUserDetailsService" class="org.Trip.security.CustomUserDetailService"></bean>
+<!-- <bean id="customUserDetailsService" class="org.Trip.security.CustomUserDetailService"></bean> -->
 
 <!-- <bean id="authFailHandler" class="org.Trip.security.UserAuthenticationFailHandler">
 	<constructor-arg name="defaultFailureUrl" value="/login?error=auth" />
@@ -59,9 +59,9 @@
 	<!-- <constructor-arg name="UserService" value="UserService" /> -->
 </bean>
 
-<!-- <bean id="UserService" class="org.Trip.security.UserAuthenticationService">
-	<constructor-arg name="UserMapper" value="UserMapper" />
-</bean> -->
+<bean id="UserService" class="org.Trip.security.UserAuthenticationService">
+	<!-- <constructor-arg name="UserMapper" value="UserMapper" /> -->
+</bean>
 
 
 <security:authentication-manager alias="authManager">
