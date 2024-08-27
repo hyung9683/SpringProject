@@ -15,7 +15,7 @@ public class ImageFileVO {
 	private String sub4;
 	private Long fno;
 	private Long tno;
-	private int localId;
+	private Long localId;
 	private Date regdate;
 	private Date update;
 

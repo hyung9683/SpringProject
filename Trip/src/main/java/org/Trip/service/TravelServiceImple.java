@@ -42,6 +42,8 @@ public class TravelServiceImple implements TravelService {
 		map.put("p_img.sub_img4", img.getSub4());
 		map.put("p_img.local_id", img.getLocalId());
 		
+		log.info("현재 map:" + map);
+		
 		travelMapper.insertTrip(map);
 		
 		

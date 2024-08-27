@@ -31,7 +31,7 @@ public class TravelMapperTests {
 	@Test
 	public void testTrip() {
 		
-		TravelVO tripVO = travelMapper 
+		TravelVO tripVO = travelMapper
 	}
 
 }
