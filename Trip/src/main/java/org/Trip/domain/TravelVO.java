@@ -1,6 +1,9 @@
 package org.Trip.domain;
 
 import java.util.Date;
+import java.util.List;
+
+import org.Trip.domain.ImageFileVO;
 
 import lombok.Data;
 
@@ -13,11 +16,13 @@ public class TravelVO {
 	private String content;
 	private String local;
 	private Long localId;
-	private String localCategory;
+	private Long localCategory;
 	private Date regdate;
 	private Date updatedate;
 	private String price;
 	private int count;
+	
+//	private List<ImageFileVO> imageList;
 	
 
 }

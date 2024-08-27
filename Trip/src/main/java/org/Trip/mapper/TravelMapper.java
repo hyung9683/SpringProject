@@ -1,6 +1,7 @@
 package org.Trip.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.Trip.domain.TravelVO;
 import org.Trip.domain.ImageFileVO;
@@ -15,10 +16,14 @@ public interface TravelMapper {
 	 
 	 public List<TravelVO> bestTrip();
 	 
-	 public List<ImageFileVO> bestImage();
+	 //위 쿼리문과 같이 트랜잭션 처리
+//	 public List<ImageFileVO> bestImage();
 	
 	
-	 public int insertTrip(TravelVO trip);
+	 // PROCEDURE로 실행
+//	 public void insertTrip(TravelVO trip);
+	 
+	 public void insertTrip(Map<String, Object> map);
 	 
 	 public int deleteTrip(Long tno);
 	 
