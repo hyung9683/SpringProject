@@ -49,14 +49,22 @@ public class TravelServiceImple implements TravelService {
 	}
 	
 	@Override
-	public int getPKNumber() {
+	public void insertGo(TravelVO tv) {
 		
-		log.info("현재 PK_TNO:" + travelMapper.selectKey());
+		log.info("테스트용 insert:" + tv);
 		
-		int tno = travelMapper.selectKey();
-		
-		return tno;
+		travelMapper.insertGo(tv);
 	}
+	
+//	@Override
+//	public int getPKNumber() {
+//		
+//		log.info("현재 PK_TNO:" + travelMapper.selectKey());
+//		
+//		int tno = travelMapper.selectKey();
+//		
+//		return tno;
+//	}
 	
 	
 

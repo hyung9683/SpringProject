@@ -26,6 +26,8 @@ public interface TravelMapper {
 	 //test를 위한 insertSelectKey
 	 public int selectKey();
 	 
+	 public int insertGo(TravelVO trip);
+	 
 	 public void insertTrip(Map<String, Object> map);
 	 
 	 public int deleteTrip(Long tno);

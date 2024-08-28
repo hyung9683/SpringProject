@@ -37,14 +37,14 @@ public class TravelServiceTests {
 		TravelVO tv = new TravelVO();
 		
 		ImageFileVO img = new ImageFileVO();
-		
+	
 //		int nextVal = travelService.getPKNumber();
 //		
 //		long tno = (long)nextVal;
 		
 		
 //		Map<String, Object> map = new HashMap<>();
-		
+	
 //		tv.setTno(tno);
 		tv.setTitle("서울 제목 지정");
 		tv.setAddress("서울특별시 어디구 어디로");
@@ -61,7 +61,7 @@ public class TravelServiceTests {
 		img.setSub3("sub3.jpg");
 		img.setSub4("sub4.jpg");
 		img.setLocalId(1L);
-		
+	
 		
 		log.info("현재 여행지:" + tv);
 		
@@ -74,5 +74,23 @@ public class TravelServiceTests {
 		
 		
 	}
+
+//	@Test
+//	public void insertTest() {
+//		
+//
+//		TravelVO tv = new TravelVO();
+//		
+//		tv.setTitle("테스트용 서울 제목");
+//		tv.setContent("테스트용 서울 내용");
+//		tv.setAddress("테스트용 서울 주소");
+//		tv.setLocalId(1L);
+//		tv.setLocal("서울특별시");
+//		tv.setLocalCategory(1L);
+//		tv.setPrice("10000원");
+//		
+//		travelService.insertGo(tv);
+//		
+//	}
 
 }
