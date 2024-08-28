@@ -23,6 +23,14 @@ public class TravelServiceTests {
 	@Setter(onMethod_ =@Autowired)
 	private TravelService travelService;
 	
+//	@Test
+//	public void testTravleKey() {
+//		
+//		log.info("SelecKey() 메서드: " + travelService.getPKNumber());
+//		
+//	}
+//	
+	
 	@Test
 	public void testTravleService() {
 		
@@ -30,19 +38,23 @@ public class TravelServiceTests {
 		
 		ImageFileVO img = new ImageFileVO();
 		
+//		int nextVal = travelService.getPKNumber();
+//		
+//		long tno = (long)nextVal;
+		
 		
 //		Map<String, Object> map = new HashMap<>();
 		
-		
+//		tv.setTno(tno);
 		tv.setTitle("서울 제목 지정");
 		tv.setAddress("서울특별시 어디구 어디로");
 		tv.setContent("서울 내용 지정");
-		tv.setLocal("서울특별시");
 		tv.setLocalId(1L);
+		tv.setLocal("서울특별시");
 		tv.setLocalCategory(1L);
 		tv.setPrice("10000원");
 		
-		img.setTno(tv.getTno());
+		
 		img.setMain("main.jpg");
 		img.setSub1("sub1.jpg");
 		img.setSub2("sub2.jpg");
@@ -56,6 +68,8 @@ public class TravelServiceTests {
 		log.info("현재 여행지/이미지들:" + img);
 		
 		travelService.registerTrip(tv, img);
+		
+		
 		
 		
 		

@@ -35,7 +35,6 @@ public class TravelServiceImple implements TravelService {
 		map.put("p_tv.tv_category", tv.getLocalCategory());
 		map.put("p_tv.tv_price", tv.getPrice());
 		map.put("p_img.m_img", img.getMain());
-		map.put("p_img.tv_no", tv.getTno());
 		map.put("p_img.sub_img1", img.getSub1());
 		map.put("p_img.sub_img2", img.getSub2());
 		map.put("p_img.sub_img3", img.getSub3());
@@ -47,6 +46,16 @@ public class TravelServiceImple implements TravelService {
 		travelMapper.insertTrip(map);
 		
 		
+	}
+	
+	@Override
+	public int getPKNumber() {
+		
+		log.info("현재 PK_TNO:" + travelMapper.selectKey());
+		
+		int tno = travelMapper.selectKey();
+		
+		return tno;
 	}
 	
 	

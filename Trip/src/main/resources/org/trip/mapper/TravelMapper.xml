@@ -40,17 +40,13 @@
 	
 	<resultMap type="org.Trip.domain.TravelVO" id="tripMap">
 		<id property="tno" column="tv_no"/>
-		<result property="tno" column="tv_no" />
 		<result property="title" column="tv_tit" />
 		<result property="address" column="tv_ads" />
 		<result property="content" column="tv_content" />
 		<result property="local" column="tv_local" />
 		<result property="localId" column="tv_id" />
 		<result property="localCategory" column="tv_category" />
-		<result property="regdate" column="regdate" />
-		<result property="updatedate" column="update_at" />
 		<result property="price" column="tv_price" />
-		<result property="count" column="user_count" />
 		<collection property="imageList" resultMap="imageMap"></collection>
 	</resultMap>
 	
@@ -61,11 +57,7 @@
 		<result property="sub2" column="sub_img2" />
 		<result property="sub3" column="sub_img3" />
 		<result property="sub4" column="sub_img4" />
-		<result property="tno" column="tv_no" />
-		<result property="fno" column="fs_no" />
 		<result property="localId" column="local_id" />
-		<result property="regdate" column="regdate" />
-		<result property="update" column="update_at" />
 	</resultMap>
 	
 
@@ -88,26 +80,24 @@
 			    fetch first 5 rows only -->
 	</select>
 	
-	<insert id="insertTrip" statementType="CALLABLE" parameterType="java.util.Map">
+	<select id="insertTrip" statementType="CALLABLE" resultMap="tripMap">
 		{CALL pro_travel(
 			#{p_tv.tv_tit, jdbcType=VARCHAR, mode=IN},
 			#{p_tv.tv_ads, jdbcType=VARCHAR, mode=IN},
 			#{p_tv.tv_content, jdbcType=VARCHAR, mode=IN},
-			#{p_tv.tv_id, jdbcType=INTEGER, mode=IN},
+			#{p_tv.tv_id, jdbcType=DECIMAL, mode=IN},
 			#{p_tv.tv_local, jdbcType=VARCHAR, mode=IN},
-			#{p_tv.tv_category, jdbcType=INTEGER, mode=IN},
+			#{p_tv.tv_category, jdbcType=DECIMAL, mode=IN},
 			#{p_tv.tv_price, jdbcType=VARCHAR, mode=IN},
 			#{p_img.m_img, jdbcType=VARCHAR, mode=IN},
-			#{p_img.tv_no, jdbcType=INTEGER, mode=IN},
 			#{p_img.sub_img1, jdbcType=VARCHAR, mode=IN},
 			#{p_img.sub_img2, jdbcType=VARCHAR, mode=IN},
 			#{p_img.sub_img3, jdbcType=VARCHAR, mode=IN},
 			#{p_img.sub_img4, jdbcType=VARCHAR, mode=IN},
-			#{p_img.local_id, jdbcType=INTEGER, mode=IN},
-			)}
+			#{p_img.local_id, jdbcType=DECIMAL, mode=IN} )}
 		
 		
-	</insert>
+	</select>
 	
 	<!-- pk를 미리 불러온다 -->
 	<select id="selectKey" resultType="int">

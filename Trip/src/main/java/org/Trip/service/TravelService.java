@@ -17,6 +17,8 @@ public interface TravelService {
 	
 	public void registerTrip(TravelVO tv, ImageFileVO img);
 	
+	public int getPKNumber();
+	
 //	public int getCount(int count);
 	
 

@@ -17,21 +17,21 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class TravelMapperTests {
 	
-	@Setter(onMethod_ =@Autowired)
-	private TravelMapper travelMapper;
-	
-	@Test
-	public void insertTest() {
-		
-		
-		
-	}
-	
-	
-	@Test
-	public void testTrip() {
-		
-		TravelVO tripVO = travelMapper
-	}
+//	@Setter(onMethod_ =@Autowired)
+//	private TravelMapper travelMapper;
+//	
+//	@Test
+//	public void insertTest() {
+//		
+//		
+//		
+//	}
+//	
+//	
+//	@Test
+//	public void testTrip() {
+//		
+//		TravelVO tripVO = travelMapper
+//	}
 
 }
