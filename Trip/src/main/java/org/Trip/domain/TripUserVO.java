@@ -1,7 +1,10 @@
 package org.Trip.domain;
 
+import java.util.List;
 import java.util.Date;
 import java.util.Collection;
+
+import org.Trip.domain.AuthVO;
 
 import org.springframework.security.core.GrantedAuthority;
 
@@ -25,6 +28,8 @@ public class TripUserVO {
 	private String accessToken;
 	private Date regDate;
 	private Date delete;
+	
+	private List<AuthVO> authList;
 	
 
 }

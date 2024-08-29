@@ -3,9 +3,14 @@ package org.Trip.mapper;
 import java.util.List;
 import java.util.Map;
 
+import java.sql.Struct;
+import java.sql.Connection;
+
 import org.Trip.domain.TravelVO;
 import org.Trip.domain.ImageFileVO;
 import org.Trip.domain.Criteria;
+
+
 
 
 public interface TravelMapper {
@@ -39,6 +44,12 @@ public interface TravelMapper {
 	 
 	 //조회수
 	 public int updateCount(int count);
+	 
+	 
+	 
+	 
+	 //%ROWTYPE 프로시저를 쓰기 위한 예제
+	 public void procedureTest(Struct tripStruct, Struct tripImgStruct);
 	 
 	 
 	 

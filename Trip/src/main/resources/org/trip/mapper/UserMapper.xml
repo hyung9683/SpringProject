@@ -66,6 +66,35 @@
 		select * from authorities where a_id = #{username}
 	</select>
 	
+	<resultMap type="org.Trip.domain.TripUserVO" id="userMap">
+		<id property="userId" column="user_id" />
+		<result property="uno" column="user_no" />
+		<result property="userId" column="user_id" />
+		<result property="passwd" column="user_passwd" />
+		<result property="email" column="user_email" />
+		<result property="phone" column="user_num" />
+		<result property="userType" column="user_num" />
+		<result property="zipCode" column="user_type" />
+		<result property="address1" column="user_adr1" />
+		<result property="address2" column="user_adr2" />
+		<result property="loginType" column="user_login_ty" />
+		<result property="regDate" column="regdate" />
+		
+		<collection property="authList" resultMap="authMap"></collection>
+	</resultMap>
+	
+	<resultMap type="org.Trip.domain.AuthVO" id="authMap">
+		<result property="ano" column="ano" />
+		<result property="userid" column="user_id" />
+		<result property="auth" column="auth" />
+	</resultMap>
+	
+	<select id="readId" resultMap="userMap">
+		select u.user_id, user_passwd, user_nick, user_email, user_num, user_type, user_zipode, user_adr1, user_adr2, user_login_ty, regdate
+		from 
+			trip_user u left outer join user_auth a on u.user_id = a.user_id
+		where u.user_id = #{userId}
+	</select>
 	
 	
 </mapper>

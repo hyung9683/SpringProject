@@ -22,7 +22,7 @@ public class TravelVO {
 	private String price;
 	private int count;
 	
-//	private List<ImageFileVO> imageList;
+	private List<ImageFileVO> imageList;
 	
 
 }

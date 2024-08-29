@@ -27,6 +27,9 @@ public interface UserMapper {
 	// 로그인 하기 위해 유저 정보를 가져온다
 	public TripUserVO read(Long uno);
 	
+	//로그인 하기 위해 유저 정보를 가져온다(아이디)
+	public TripUserVO readId(String userId);
+	
 	// 계정 삭제
 	public int delete(Long uno);
 	

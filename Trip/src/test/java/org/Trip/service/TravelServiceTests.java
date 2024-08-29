@@ -47,8 +47,8 @@ public class TravelServiceTests {
 	
 //		tv.setTno(tno);
 		tv.setTitle("서울 제목 지정");
-		tv.setAddress("서울특별시 어디구 어디로");
 		tv.setContent("서울 내용 지정");
+		tv.setAddress("서울특별시 어디구 어디로");
 		tv.setLocalId(1L);
 		tv.setLocal("서울특별시");
 		tv.setLocalCategory(1L);

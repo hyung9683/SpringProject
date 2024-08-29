@@ -9,7 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
-import org.Trip.domain.MemberVO;
+import org.Trip.domain.TripUserVO;
 
 import lombok.Getter;
 
@@ -21,20 +21,20 @@ public class CustomUser extends User {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private MemberVO member;
+	private TripUserVO vo;
 	
 	public CustomUser(String username, String password, Collection<? extends GrantedAuthority> authorities) {
 		
 		super(username, password, authorities);
 	}
 	
-	public CustomUser(MemberVO vo) {
+	public CustomUser(TripUserVO vo) {
 		
 		//Collectors.toList()는 스트림의 모든 요소를 List
-		super(vo.getUserid(), vo.getUserpw(), vo.getAuthList().stream().map(auth -> new SimpleGrantedAuthority(auth.getAuth())).collect(Collectors.toList()));
+		super(vo.getUserId(), vo.getPasswd(), vo.getAuthList().stream().map(auth -> new SimpleGrantedAuthority(auth.getAuth())).collect(Collectors.toList()));
 
 		
-		this.member = vo;
+		this.vo = vo;
 	}
 
 }

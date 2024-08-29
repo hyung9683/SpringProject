@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.extern.log4j.Log4j;
 import lombok.Setter;
 
+import org.Trip.service.TravelService;
+
 import org.Trip.domain.TravelVO;
 import org.Trip.domain.FestivalVO;
 import org.Trip.domain.ImageFileVO;
@@ -34,10 +36,13 @@ import org.Trip.mapper.TravelMapper;
 /**
  * Handles requests for the application home page.
  */
-//@Controller
-@RestController
+@Controller
+//@RestController
 @Log4j
 public class HomeController {
+	
+	@Setter(onMethod_ = {@Autowired})
+	private TravelService travelService;
 	
 	@Setter(onMethod_ = {@Autowired})
 	private TravelMapper travelMapper;
@@ -46,12 +51,18 @@ public class HomeController {
 	private FestivalMapper festivalMapper;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET, produces = "text/plain; charset=UTF-8")
-	public void main(Model model, @ModelAttribute("trip") TravelVO trip, @ModelAttribute("fes") FestivalVO fes) {
+	public String main(Model model, TravelVO trip, FestivalVO fes) {
 		
 		
-		travelMapper.bestTrip().forEach(best -> log.info(best));
+		List<TravelVO> topTrips = travelService.bestTrip();
+		
+		log.info(topTrips);
+		
+		model.addAttribute("topTrips", topTrips);
 		
 		
+		
+		return "main";
 		
 		
 		
