@@ -1,8 +1,9 @@
 package org.Trip.mapper;
 
-import org.Trip.security.UserSecurityDetails;
 
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 //import org.apache.ibatis.annotations.Select;
 import org.Trip.domain.TripUserVO;
@@ -37,7 +38,10 @@ public interface UserMapper {
 	//현재 가입한 유저 수
 	public int getTotalCount(Criteria cri);
 	
-	// 권한 및 로그인 타입, 다른 테이블
-	public UserSecurityDetails loginID(String id);
+	
+	//프로시저를 이용한 회원가입
+	public void procedureInsert(Map<String, Object> map);
+	
+	
 
 }

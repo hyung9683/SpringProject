@@ -62,10 +62,10 @@
 	</select>
 	
 	
-	<select id="loginID" resultType="org.Trip.security.UserSecurityDetails">
+	<!-- <select id="loginID" resultType="org.Trip.security.UserSecurityDetails">
 		select * from authorities where a_id = #{username}
 	</select>
-	
+	 -->
 	<resultMap type="org.Trip.domain.TripUserVO" id="userMap">
 		<id property="userId" column="user_id" />
 		<result property="uno" column="user_no" />
@@ -95,6 +95,20 @@
 			trip_user u left outer join user_auth a on u.user_id = a.user_id
 		where u.user_id = #{userId}
 	</select>
+	
+	<insert id="procedureInsert" statementType="CALLABLE">
+		{CALL pro_join(
+			#{p_user_id, jdbcType=VARCHAR, mode=IN},
+			#{p_user_pw, jdbcType=VARCHAR, mode=IN},
+			#{p_user_nick, jdbcType=VARCHAR, mode=IN},
+			#{p_user_email, jdbcType=VARCHAR, mode=IN},
+			#{p_user_num, jdbcType=VARCHAR, mode=IN},
+			#{p_user_zipcode, jdbcType=VARCHAR, mode=IN},
+			#{p_user_adr1, jdbcType=VARCHAR, mode=IN},
+			#{p_user_adr2, jdbcType=VARCHAR, mode=IN},
+			#{p_login_ty, jdbcType=NUMERIC, mode=IN}
+		)}
+	</insert>
 	
 	
 </mapper>
