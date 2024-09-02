@@ -48,8 +48,8 @@
 					
 						<a href="#" class="imgspace">
 							<c:choose>
-							<c:when test="${trip.main}">
-								<img src="../resources/uploads/${trip.main}" style="width: 230px;" alt="Image">
+							<c:when test="${tv.main}">
+								<img src="../resources/uploads/${tv.main}" style="width: 230px;" alt="Image">
 							</c:when>
 							<c:otherwise>
 								<img src="../resources/uploads/goodsempty.jpg" style="width: 230px;" alt="Default Image">
@@ -60,11 +60,11 @@
 						</a>
 						<div class="card-body">
 							<a href="#" class="travelTitle">
-								<h5 class="card-title"><c:out value="${trip.tit}" /><p class="card-text"><c:out value="[${trip.local}]"/></p></h5>
+								<h5 class="card-title"><c:out value="${tv.tit}" /><p class="card-text"><c:out value="[${tv.local}]"/></p></h5>
 								
 							</a>
 							<a href="#" class="travelContent">
-								<p class="card-text truncate"><c:out value="${trip.content}" /></p>
+								<p class="card-text truncate"><c:out value="${tv.content}" /></p>
 							</a>
 						</div>
 					

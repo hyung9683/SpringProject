@@ -3,10 +3,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@include file="./includes/header.jsp" %>
-<form id="join_form" method="post">
 	<div class="subjecet">
 		<span>회원가입</span>
 	</div>
+<form action="/join" id="join_form" method="post">
 	<div class="id_wrap">
 		<div class="id_name">아이디</div>
 		<div class="id_input_box">
@@ -44,7 +44,8 @@
 		
 		</br>
 		
-		<button width="100px" class="btn" type="submit">가입</button>
+		<!-- <button width="100px" class="btn" type="submit">가입</button> -->
+		<a href="/login" class="btn btn-lg btn-success btn-block">가입</a>
 	</div>
 </form>
 <img src="./resources/uploads/asset/kakaoLogin.png" class="btn_kakao" style="scale: 55%; margin-top:-40px; margin-left:-39px;">
@@ -58,6 +59,7 @@
 	})
 	
 	function addressPostCode() {
+		
 		new daum.PostCode({
 			
 			oncomplete: function(data) {
@@ -139,6 +141,15 @@
 				}
 			} */
 		}).open();
+		
+		// 가입 누를 시
+		$(".btn-success").on("click", function(e) {
+			
+			e.preventDefault();
+			$("form").submit();
+			
+		});
+		
 	}
 </script>
 <%@include file="./includes/footer.jsp" %>
