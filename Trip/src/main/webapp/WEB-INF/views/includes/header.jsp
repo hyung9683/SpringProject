@@ -16,7 +16,7 @@
 
 	<div class="header_wrapper" id="wrapper" style="font-sze: 15px; position: fixed; top: 0; left: 0; z-index: 20; width: 100%; background: #ffffff; box-shadow: 0 4px 5px -4px rgb(219, 219, 219);">
 		<nav class="navbar_top" style="display: flex; height:90px; justify-content:space-between; align-items: center; padding: 0; --bs-navbar-padding-x: 0;">
-				<div class="navbar_logo" style="scale:50%; position: relative; left:-120px; top: 31px; padding: 0 0 0 16px;">
+				<div class="navbar_logo" style="scale:50%; position: relative; left:-120px; top: 10px; padding: 0 0 0 16px;">
 					<a class="navbar-brand title" href="home.jsp">
 						<img src="../../../resources/uploads/logo.png">
 					</a>
@@ -48,10 +48,10 @@
 					<ul class="join" style="display: flex; justify-content: space-between; align-items: center;">
 					<sec:authorize access="!isAuthenticated()">
 						<li style="margin-left: 0px; width: 120px; height: 6px; line-height: 0px; text-align: center; padding: 8px 0; margin-top: 14px;">
-							<a class="nav-link" href="login.jsp">로그인</a>
+							<a class="nav-link" href="/login">로그인</a>
 						</li>
 						<li style="margin-left: 30px; width: 120px; height: 6px; line-height: 0px; text-align: center; padding: 8px 0; margin-top: 14px;">
-							<a class="nav-link" href="join.jsp">회원가입</a>
+							<a class="nav-link" href="/join">회원가입</a>
 						</li>
 					</sec:authorize>
 					<sec:authorize access="isAuthenticated()">
@@ -65,8 +65,8 @@
 		
 		</nav>
 		
-		<nav class="navbar_bottom" style="justify-content: space-between; align-items: center; display: flex; height: 60px;">
-			<form action="/trip">
+		<nav class="navbar_bottom">
+			<form action="/trip" method="get">
 				<ul class="category" style="display:flex; position: relative; margin:auto;">
 					<li style="font-size: 1rem; display:inline-block; margin-left: 30px; width: 8rem; height: 30px; margin-top: 16px; text-align: center;"><a class="nav-link" href="#">여행지</a></li>
 					<li style="font-size: 1rem; display:inline-block; margin-left: 30px; width: 8rem; height: 30px; margin-top: 16px; text-align: center;"><a class="nav-link" href="#">축제</a></li>
@@ -230,10 +230,11 @@ a {
 }
 
 .navbar_bottom {
-	justify-contet: space-between;
+	justify-content: space-between;
 	align-items: center;
 	display: flex;
 	height: 60px;
+	max-width: 100%;
 }
 
 .category {
